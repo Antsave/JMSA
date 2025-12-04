@@ -1,13 +1,9 @@
 
-
-
-import numpy as np
-
-def moth_flame_optimization(obj_func, dim,bounds, n_moths=30, n_iters=200,b=1.0,seed=None):
+def moth_flame_optimization(obj_fn, dim,bounds, n_moths=30, n_iters=200,b=1.0,seed=None):
     ''' Moth Flame Optimization
     
         Parameters:
-            obj_func: objective function
+            obj_fn: objective function
             dim_bounds: bounds
             n_moths: number of moths
             n_iters: number of iterations
@@ -28,7 +24,7 @@ def moth_flame_optimization(obj_func, dim,bounds, n_moths=30, n_iters=200,b=1.0,
         rng = np.random.default_rng()
 
 
-    # handling bounds for obj_func
+    # handling bounds for obj_fn
     if isinstance(bounds[0], (list, tuple, np.ndarray)):
         lb = np.array([bnd[0] for bnd in bounds], dtype=float)
         ub = np.array([bnd[1] for bnd in bounds], dtype=float)
@@ -39,7 +35,7 @@ def moth_flame_optimization(obj_func, dim,bounds, n_moths=30, n_iters=200,b=1.0,
     # initializing moth positions in the bounds
     moths = lb + (ub - lb) * rng.random((n_moths, dim))
     # fitness function w selected obj_fn
-    fitness = np.array([obj_func(moths[i]) for i in range(n_moths)])
+    fitness = np.array([obj_fn(moths[i]) for i in range(n_moths)])
     # sorts index best to worst based on fitness
     idx = np.argsort(fitness)
 
@@ -87,7 +83,7 @@ def moth_flame_optimization(obj_func, dim,bounds, n_moths=30, n_iters=200,b=1.0,
         moths = np.clip(moths, lb, ub)
 
         # recalculate moth fitness
-        fitness = np.array([obj_func(moths[i]) for i in range(n_moths)])
+        fitness = np.array([obj_fn(moths[i]) for i in range(n_moths)])
 
         # combine moths and flames
         all_positions = np.vstack([flames, moths])
@@ -111,6 +107,3 @@ def moth_flame_optimization(obj_func, dim,bounds, n_moths=30, n_iters=200,b=1.0,
         history.append(best_score)
 
     return best_pos, best_score, history
-
-
-
