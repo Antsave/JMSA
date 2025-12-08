@@ -5,7 +5,7 @@
 
 import numpy as np
 
-def WOA_test(f, dim, lb, ub, num_whales=30, max_iter=500, seed = None):
+def WOA(f, dim, lb, ub, num_whales=30, max_iter=500, seed = None):
     """
     Whale Optimization Algorithm
 
