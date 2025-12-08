@@ -2,9 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# ----------------------
-# Bird Mating Optimizer 
-# ----------------------
 
 def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
     """
@@ -113,10 +110,9 @@ def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
 #########################################
 
 
-        # -------------------------------------------------------
         # Monogamous males: mate with 1 female, one new solution
         # Male picks 1 interesting female
-        # -------------------------------------------------------
+    
 
         for m in mono:
 
@@ -160,11 +156,9 @@ def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
 ##########################################################################################################################################################################
 
 
-        # --------------------------------------------------------
         # Polygynous: male mates with 3 females, one new solution
         # Move male towards 3 females
-        # --------------------------------------------------------
-        
+
 
         for m in poly:
 
@@ -213,11 +207,9 @@ def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
 
 
 
-
-        # --------------------------------------------------------
         # Polyandrous: female mates with 3 males 
         # Move female towards 3 males
-        # --------------------------------------------------------
+    
 
 
         for f in polyandrous:
@@ -260,10 +252,10 @@ def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
 ##########################################################################################################################################################################
 
 
-        # -----------------------------------------------------
+
         # Parthenogenesis: small mutation for the best females
         # Female mutates herself to create new solution
-        # -----------------------------------------------------
+  
 
 
         for f in partheno:
@@ -272,9 +264,9 @@ def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
             x = pop[f].copy()
 
             # mutation control factor, time-varying
-                # At generation 0 → 0 / max = 0
-                # At generation half → 0.5
-                # At final generation → 1
+                # At generation 0 --> 0 / max = 0
+                # At generation half --> 0.5
+                # At final generation --> 1
             mcfp = 0.1 + 0.8 * (gen / max_gens)
             # mutation factor
             mu = 0.001
@@ -296,10 +288,11 @@ def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
 ##########################################################################################################################################################################
 
 
-        # ---------------------------
         # Promiscuous new birds (chaotic map)
-        # ---------------------------
+    
         # n_promis = max(1, pop_size // 10)
+
+
         for _ in range(n_prom):
             # chaos = some random value (above)
             # done with logistic chaotic map (in paper)
@@ -318,10 +311,9 @@ def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
 ##########################################################################################################################################################################
 
 
-        # ---------------------------
         # Replacement
-        # ---------------------------
-
+      
+        # replace bird with baby if the baby is better
         for idx, baby in zip(replace_idx, new_birds):
             fb = obj_fn(baby)
             if fb < fit[idx]:
