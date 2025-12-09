@@ -10,7 +10,7 @@ def moth_flame_optimization(obj_fn, dim,bounds, n_moths=30, n_iters=200,b=1.0,se
             dim_bounds: bounds
             n_moths: number of moths
             n_iters: number of iterations
-            b: spiral parameter 
+            b: spiral parameter, controls tightness of spiral
             seed: random seed
             
         Returns:
@@ -78,6 +78,7 @@ def moth_flame_optimization(obj_fn, dim,bounds, n_moths=30, n_iters=200,b=1.0,se
             distance_to_flame = np.abs(flame - moths[i])
             # spiral eq.
             moths[i] = (
+                # b = spiral param
                 distance_to_flame * np.exp(b * t) * np.cos(2 * np.pi * t)
                 + flame
             )
@@ -109,4 +110,4 @@ def moth_flame_optimization(obj_fn, dim,bounds, n_moths=30, n_iters=200,b=1.0,se
         # save history
         history.append(best_score)
 
-    return best_pos, best_score, history
+    return best_pos, best_score, history 
