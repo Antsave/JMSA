@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 
-def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
+def BMO(obj_fn, dim, bounds, pop_size=30, max_gens=500, seed=None):
     """
     Bird Mating Optimizer
     
@@ -20,6 +20,9 @@ def BMO(obj_fn, dim, bounds, pop_size=50, max_gens=500, seed=None):
         history: history of best fitness values in each generation
 
     """
+
+    # convergence and stopping functions !!!!!!
+
 
     # set seed
     if seed is not None:

@@ -2,7 +2,7 @@
 import numpy as np
 
 
-def moth_flame_optimization(obj_fn, dim,bounds, n_moths=30, n_iters=200,b=1.0,seed=None):
+def moth_flame_optimization(obj_fn, dim,bounds, n_moths=30, n_iters=500,b=1.0,seed=None):
     ''' Moth Flame Optimization
     
         Parameters:
